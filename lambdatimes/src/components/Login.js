@@ -16,7 +16,11 @@ const LoginFormContainer = styled.div`
 const LoginForm = styled.form`
   display: flex;
   flex-direction: column;
-  height: 25%;
+  background: #fafafa;
+  padding: 20px;
+  padding-bottom: 10px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
 `;
 
 const LoginInput = styled.input`
