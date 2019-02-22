@@ -3,17 +3,18 @@ import TopBar from "./components/TopBar";
 import Header from "./components/Header";
 import authenticate from "./components/authenticate/authenticate";
 import Content from "./components/Content/Content";
-import Login from "./components/Login";
 
 const App = props => {
   return (
     <div className="App">
-      <TopBar />
+      <TopBar updateAuth={props.updateAuth} />
       <Header />
       {props.authenticated ? (
         <Content />
       ) : (
-        <Login updateAuth={props.updateAuth} />
+        <React.Fragment>
+          <p>This content is protected. Please login.</p>
+        </React.Fragment>
       )}
     </div>
   );

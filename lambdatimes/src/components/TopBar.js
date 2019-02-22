@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 
+import Login from "../components/Login";
+
 // Refactor this component to use styled components and not classNames
 // You can find the corresponding CSS in the CSS/index.css file
 
@@ -76,27 +78,57 @@ const TBContainerRightSpan = styled.span`
   cursor: pointer;
 `;
 
-const TopBar = () => {
-  return (
-    <TopBarComponent>
-      <TopBarContainer>
-        <TBContainerLeft>
-          <TBContainerLeftSpan>TOPICS</TBContainerLeftSpan>
-          <TBContainerLeftSpan>SEARCH</TBContainerLeftSpan>
-        </TBContainerLeft>
-        <TBContainerCenter>
-          <TBContainerCenterSpan>GENERAL</TBContainerCenterSpan>
-          <TBContainerCenterSpan>BROWNBAG</TBContainerCenterSpan>
-          <TBContainerCenterSpan>RANDOM</TBContainerCenterSpan>
-          <TBContainerCenterSpan>MUSIC</TBContainerCenterSpan>
-          <TBContainerCenterSpan>ANNOUNCEMENTS</TBContainerCenterSpan>
-        </TBContainerCenter>
-        <TBContainerRight>
-          <TBContainerRightSpan>LOG IN</TBContainerRightSpan>
-        </TBContainerRight>
-      </TopBarContainer>
-    </TopBarComponent>
-  );
-};
+class TopBar extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      showLogin: false
+    };
+  }
+
+  reveal = () => {
+    this.setState({
+      showLogin: true
+    });
+  };
+
+  handleSubmit = () => {
+    this.setState({
+      showLogin: false
+    });
+  };
+
+  render() {
+    return (
+      <TopBarComponent>
+        <TopBarContainer>
+          <TBContainerLeft>
+            <TBContainerLeftSpan>TOPICS</TBContainerLeftSpan>
+            <TBContainerLeftSpan>SEARCH</TBContainerLeftSpan>
+          </TBContainerLeft>
+          <TBContainerCenter>
+            <TBContainerCenterSpan>GENERAL</TBContainerCenterSpan>
+            <TBContainerCenterSpan>BROWNBAG</TBContainerCenterSpan>
+            <TBContainerCenterSpan>RANDOM</TBContainerCenterSpan>
+            <TBContainerCenterSpan>MUSIC</TBContainerCenterSpan>
+            <TBContainerCenterSpan>ANNOUNCEMENTS</TBContainerCenterSpan>
+          </TBContainerCenter>
+          <TBContainerRight>
+            <TBContainerRightSpan onClick={this.reveal}>
+              LOG IN
+            </TBContainerRightSpan>
+          </TBContainerRight>
+        </TopBarContainer>
+        {this.state.showLogin ? (
+          <Login
+            handleSubmit={this.handleSubmit}
+            updateAuth={this.props.updateAuth}
+          />
+        ) : null}
+      </TopBarComponent>
+    );
+  }
+}
 
 export default TopBar;
