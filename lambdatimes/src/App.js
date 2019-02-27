@@ -1,16 +1,23 @@
-import React, { Component } from 'react';
-import TopBar from './components/TopBar';
-import Header from './components/Header';
-import Content from './components/Content/Content';
+import React from "react";
+import TopBar from "./components/TopBar";
+import Header from "./components/Header";
+import authenticate from "./components/authenticate/authenticate";
+import Content from "./components/Content/Content";
 
-const App = () => {
+const App = props => {
   return (
     <div className="App">
-      <TopBar />
+      <TopBar updateAuth={props.updateAuth} />
       <Header />
-      <Content />
+      {props.authenticated ? (
+        <Content />
+      ) : (
+        <React.Fragment>
+          <p>This content is protected. Please login.</p>
+        </React.Fragment>
+      )}
     </div>
   );
-}
+};
 
-export default App;
+export default authenticate(App);
